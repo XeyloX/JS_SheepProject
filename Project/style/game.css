@@ -1,35 +1,152 @@
-#board{
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(/Project/images/BG1.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+    font-size: 1.4em;
+}
+
+.container {
+    display: flex;
+    margin: 0 auto;
+    padding: 0;
+    flex-wrap: wrap;
+    min-width: 300px;
+    max-width: 1300px;
+    justify-content: center;
+    align-items: center;
+    min-height: 700px;
+    position: relative;
+}
+h1{
+    color: lightgrey;
+    width: 60%;
+    text-align: center;
+    margin:20px auto;
+}
+
+label,
+input,
+button {
+    font: inherit;
+    font-weight: bolder;
+    margin: 12px;
+    color: #222;
+}
+
+input, button{
+    border-radius: 12px;
+    background: rgb(245, 222, 179);
+}
+
+.size {
+  display: inline-flex;
+  align-items: center;
+}
+
+.size label {
+  display: inline-block;
+  width: 60px;
+}
+
+input[type="radio"]{
+    width: 30px;
+    height: 30px;
+    accent-color: rgb(245, 222, 179);;
+}
+
+#gameSettings {
+    background-color: rgba(245, 222, 179, 0.6);
+    padding: 80px;
+    border-radius: 120px;
+
+}
+
+#board {
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 50px);
-
+    background-color: rgba(245, 222, 179, 0.6);
+    border-radius: 80px;
+    align-items: center !important;
+    justify-content: center;
+    width: 70%;
+    min-height: 400px;
+    padding: 4%;
+    margin: 0 auto;
+    
 }
 
-.cell{
+#remainingShips{
+    background-color: rgba(245, 222, 179, 0.6);
+    position: absolute;
+    left:85%;
+    width: 35%;
+    padding: 4%;
+    border-radius: 60px;
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
+
+.cell {
     width: 50px;
     height: 50px;
     border: 1px solid black;
-    background-color: grey;
     position: relative;
 }
 
-img{
-    height:50px;
-    z-index:10;
+img {
+    height: 50px;
+    z-index: 10;
 }
 
-.ship{
+.ship {
     position: absolute;
-    height: 150px;
     z-index: 10;
     pointer-events: none;
 }
 
-img#normal{
-    left: -100%;
+img#rotated {
+    transform: rotate(90deg);
 }
 
-img#rotated{
-    transform: rotate(90deg);
-    top: -100%;
-} 
+.explosionAnimated {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+    animation: explode 2s forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+
+    }
+}
+
+table,
+caption,
+th,
+tr,
+td {
+    border: 1px solid black;
+    padding: 4px;
+    margin: 0;
+    border-collapse: collapse;
+    text-align: center;
+}

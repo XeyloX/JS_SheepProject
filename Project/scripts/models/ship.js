@@ -5,11 +5,11 @@ export default class Ship{
     image;
     startXY;
 
-    constructor(id, size, image, startXY){
+    constructor(id, size){
         this.id = id;
         this.size = size;
         this.health = size;
-        this.image = image;
-        this.startXY = startXY;
+        this.image = "";
+        this.startXY = "";
     }
 }

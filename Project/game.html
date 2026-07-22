@@ -1,13 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./scripts/game.js"></script>
     <link rel="stylesheet" href="./style/game.css">
+    <script type="module" src="./scripts/game.js" defer></script>
     <title>Document</title>
 </head>
 <body>
-    <div id="board"></div>  
+    <h1>משחק</h1>
+    <div class="container">
+        <div class="setup">
+            <form id="gameSettings">
+                <label>בחרו גודל מפה</label><br>
+                <div class="size"><label>10x10</label><input type="radio" name="boardSize" value="10" checked></div><br>
+                <div class="size"><label>11x11</label><input type="radio" name="boardSize" value="11"></div><br>
+                <div class="size"><label>12x12</label><input type="radio" name="boardSize" value="12"></div><br>
+                <div class="size"><label>13x13</label><input type="radio" name="boardSize" value="13"></div><br>
+                <div class="size"><label>14x14</label><input type="radio" name="boardSize" value="14"></div><br>
+                <div class="size"><label>15x15</label><input type="radio" name="boardSize" value="15"></div><br>
+
+                <label>בחרו את ספינות היריב עד 6</label><br>
+                <label class="shipsRemaining" id="0">ספינות שנשארו לבחירה: 6</label><br>
+                <label>ספינה גודל 2</label><input class="shipCount" id="ship2" type="number" value="0" max="6"><br>
+                <label>ספינה גודל 3</label><input class="shipCount" id="ship3" type="number" value="0" max="6"><br>
+                <label>ספינה גודל 4</label><input class="shipCount" id="ship4" type="number" value="0" max="6"><br>
+                <label>ספינה גודל 5</label><input class="shipCount" id="ship5" type="number" value="0" max="6" ><br>
+                <button type="submit">התחלת משחק</button>
+            </form>
+        </div>
+
+        <div id="board" style="visibility: hidden;"></div>  
+
+        <div id="remainingShips" style="visibility: hidden;">
+            <table style="width: 100%">
+                <caption>ספינות הקרב שנשארו:</caption>
+                <tr>
+                    <th>כמות ספינות שנשארו</th>
+                    <th>גודל הספינה</th>
+                </tr>
+                <tr>
+                    <td class="shipsLeft" id="remainingTwo">0</td>
+                    <td>ספינה גודל 2</td>
+                </tr>
+                <tr>
+                    <td class="shipsLeft" id="remainingThree">0</td>
+                    <td>ספינה גודל 3</td>
+                </tr>
+                <tr>                
+                    <td class="shipsLeft" id="remainingFour">0</td>
+                    <td>ספינה גודל 4</td>
+                </tr>
+                <tr>
+                    <td class="shipsLeft" id="remainingFive">0</td>
+                    <td>ספינה גודל 5</td>
+                </tr>
+            </table>
+
+            <div id="endGame" style="text-align: center; margin: 0 auto; visibility: hidden">
+                <h4>!כל הכבוד, מצאתם את כל הספינות</h4>
+                <button id="restart" onclick="window.location.href = 'game.html'">התחל משחק מחדש</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
