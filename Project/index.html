@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./scripts/login.js"></script>
+    <link rel="stylesheet" href="./style/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>התחברות</h1>
+        <form id="Login_form">
+            <div class="box">
+                <label>שם משתמש: </label>
+                <input id="Username_login" type="text">
+                <label class="alert" id="Username_alert"></label>
+            </div>
+            <div class="box">
+                <label>סיסמה: </label>
+                <input id="Password_login" type="password">
+                <label class="alert" id="Password_alert"></label>
+            </div>
+            <button id="button_submit" type="submit">התחבר</button>
+            <a href="registration.html" class="goregister">אין לכם עדיין חשבון? לחצו כאן</a>
+        </form>
+    </div>
+</body>
+</html>

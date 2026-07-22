@@ -1,0 +1,145 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url(/Project/images/BG1.jpg);
+    background-size: cover;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+    font-size:1.5em;
+}
+.container{
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 1000px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+h1{
+    margin: 0 auto;
+    padding: 0;
+    font-size: 3em;
+    width: 40%;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;    
+    color:lightgray;
+}
+
+#Register_form{
+    border: 2px solid black;
+    border-radius: 120px;
+    background: rgba(245, 222, 179, 0.6);
+    padding : 8% 14%;  
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 200px;
+}
+
+.box{
+    margin: 0 auto;
+    padding: 5px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position:relative;
+}
+
+label{
+    width: 50%;
+    font-weight: bold;
+    color:#222;
+}
+
+input{
+    border: none;
+    border-radius: 12px;
+}
+
+.boxdate{
+    width: 50%;
+}
+
+#Date{
+    text-align: center;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+input, .boximg{
+    width: 50%;
+}
+.boximg{
+    display: flex;
+    flex-direction: column;
+    height:100px;
+}
+
+
+.boximg button{
+    width: 50%;
+    border: none;
+    transition: 800ms;
+    border-radius: 12px;
+    color: #222;
+    font-weight: bold;
+    transition: 800ms;
+    background: rgb(245, 222, 179);
+}
+.boximg button:hover{
+    transition: 800ms;
+    background: rgba(0, 0, 0, 0.323);
+}
+#button_submit{
+    border: none;
+    border-radius: 12px;
+    color: #222;
+    font-weight: bold;
+    transition: 800ms;
+    background: rgb(245, 222, 179);
+    padding: 8px;
+
+}
+#button_submit:hover{
+    transition: 800ms;
+    background: rgba(0, 0, 0, 0.323); 
+}
+.boximg img{
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.gologin{
+    width:100%;
+    margin-top:20px;
+    color:black;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+.alert{
+    position: absolute;
+    transition: 1000ms;
+    top:8px;
+    right:105%;
+    z-index: 1000;
+    background-color: rgba(245, 245, 245, 0.701);
+    border-radius: 12px;
+    width: max-content;
+    box-sizing: content-box;
+    max-width: 400px;
+    font-weight: bold;
+    padding: 0;
+    white-space: pre-wrap;
+    font-size: 15px;
+}

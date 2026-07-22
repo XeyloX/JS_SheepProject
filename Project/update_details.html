@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./scripts/update_details.js"></script>
+    <link rel="stylesheet" href="./style/registration.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>עדכון פרטים</h1>
+        
+        <form id="Register_form">
+            <div class="box">
+                <label>שם משתמש: </label>
+                <input id="Username_in" type="text">
+                <label class="alert" id="Username_alert"></label>
+            </div>
+            <div class="box">
+                <label>סיסמה: </label>
+                <input id="Password_in" type="password">
+                <label class="alert" id="Password_alert"></label>
+            </div>
+            <div class="box">
+                <label>אימות סיסמה: </label>
+                <input id="Confirm_in" type="password">
+                <label class="alert" id="Confirm_alert"></label>
+            </div>
+            <div class="box">
+                <label>שם פרטי: </label>
+                <input id="First_in" type="text">
+                <label class="alert" id="First_alert"></label>
+            </div>
+            <div class="box">
+                <label>שם משפחה: </label>
+                <input id="Last_in" type="text">
+                <label class="alert" id="Last_alert"></label>
+            </div>
+            <div class="box">
+                <label>אימייל: </label>
+                <input id="Email_in" type="email">
+                <label class="alert" id="Email_alert"></label>
+            </div>
+            <div class="box">
+                <label>עיר: </label>
+                <input id="cityList" type="text" list="cities">
+                <datalist id="cities"></datalist>
+                <label class="alert" id="City_alert"></label>
+            </div>
+            <div class="box">
+                <label>רחוב: </label>
+                <input id="Street_in" type="text">
+                <label class="alert" id="Street_alert"></label>
+            </div>
+            <div class="box">
+                <label>מספר: </label>
+                <input id="Housenum_in" type="number">
+                <label class="alert" id="Housenum_alert"></label>
+            </div>
+            <div class="box">
+                <label>תאריך לידה: </label>
+                <div class="boxdate">
+                    <input id="Date" type="date" onkeydown="return false" onfocus="this.showPicker()">
+                </div>
+                <label class="alert" id="Date_alert"></label>
+            </div>
+            
+            <div class="box">
+                <label>תמונה: </label>
+                <input hidden id="Profile_pic" type="file" accept=".jpg,.jpeg,image/jpeg">
+                <div class="boximg">
+                    <button type="button" id="Choose_picture">הוסף תמונה +</button>
+                    <img id="pic_preview" src="" alt="">
+                </div>
+                <label class="alert" id="Picture_alert"></label>
+            </div>
+            <button id="button_submit" type="submit">עדכן פרטים</button>
+        </form>
+    </div>
+</body>
+</html>

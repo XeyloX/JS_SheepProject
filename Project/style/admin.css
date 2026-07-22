@@ -1,0 +1,110 @@
+
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url(/Project/images/BG1.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+    font-size:1.5em;
+}
+
+.container{
+    display: flex;
+    margin: 0 auto;
+    width: 1500px;
+    min-height: 700px;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+h1{
+    margin: 0 auto;
+    padding: 0;
+    font-size: 3em;
+    width: 40%;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;    
+    color:lightgray;
+}
+
+
+.box{
+    margin: 24px;
+    padding: 24px;
+    display: flex;
+    position:relative;
+    align-items: center;
+    max-height: 100px;
+}
+
+img{
+    height:50px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.menu {
+    display: flex;
+    height: 50px;
+    background-color: rgba(245, 222, 179, 0.6);
+    justify-content: center;
+}
+
+button{
+    font: inherit;
+    border: none;
+    border-radius: 12px;
+    color: #222;
+    font-weight: bold;
+    transition: 800ms;
+    background: rgb(245, 222, 179);
+    padding: 8px;
+    margin:5px;
+}
+
+button:hover{
+    transition: 800ms;
+    background: rgba(0, 0, 0, 0.323); 
+}
+
+table{
+    border: 2px solid black;
+    border-radius: 120px;
+    background: rgba(245, 222, 179, 0.6);
+    margin: 0 auto;
+    margin-bottom: 200px;
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+tr, td, h3{
+    font-weight: bold;
+    color:#222;
+    white-space: pre-wrap;
+    
+}
+
+tr{
+    border: rgba(245, 222, 179, 0.6);
+    border-bottom: 2px solid black; 
+}
+
+td{
+    min-width: 13.6%;
+    max-width: 200px;
+    text-align: center;
+}
+
+#email{
+    min-width:350px;
+}
+#picture{
+    min-width: 100px;
+}
+
