@@ -37,16 +37,18 @@ export default class User {
         return `${day} ${month} ${year}`;
     }
 
-    // UpdateDetails(username, password, picture, first, last, email, date, city, street, housenum){
-    //     this.username = username;
-    //     this.password = password;
-    //     this.picture = picture;
-    //     this.First = first;
-    //     this.last = last;
-    //     this.email = email;
-    //     this.date = date;
-    //     this.city = city;
-    //     this.street = street;
-    //     this.housenum = housenum;
-    // }
+    UpdateDetails(username, password, picture, first, last, email, date, city, street, housenum){
+        this.username = username;
+        this.password = password;
+        this.picture = picture;
+        this.first = first;
+        this.last = last;
+        this.email = email;
+        this.date = date;
+        this.city = city;
+        this.street = street;
+        this.housenum = housenum;
+
+        return this;
+    }
 }

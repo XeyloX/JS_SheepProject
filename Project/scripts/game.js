@@ -266,8 +266,10 @@ export function StartGame(){
         let shipThree = Number(document.getElementById("ship3").value) || 0;
         let shipFour = Number(document.getElementById("ship4").value) || 0;
         let shipFive = Number(document.getElementById("ship5").value) || 0;
+
         let totalShips = shipTwo + shipThree + shipFour + shipFive;
-        console.log(totalShips);
+       
+
 
         if (totalShips > 0 && totalShips <= 6){
             document.querySelector("#gameSettings").style.display = "none";

@@ -38,6 +38,7 @@ export function CheckImage(){
 
 export function VerifyForm(page){
     const users = JSON.parse(localStorage.getItem(`users`)) || [];
+    const loggedUser = JSON.parse(sessionStorage.getItem('userToEdit')) || JSON.parse(sessionStorage.getItem('loggedUser')) || [];
 
     let inputUsername = document.querySelector(`#Username_in`).value;
     let inputPassword = document.querySelector(`#Password_in`).value;
@@ -57,10 +58,19 @@ export function VerifyForm(page){
     const usernameValid = regUsername.test(inputUsername);
     document.querySelector(`#Username_alert`).textContent = (!usernameValid) ? error + "  אותיות לועזיות בלבד, מספרים ותווים מיוחדים, עד 60 תווים.  " : "";
     
-    const usernameTaken = false;
-    if (page == "registration" && users.some(user => user.username.toLowerCase() === inputUsername.toLowerCase() || inputUsername.toLowerCase() === "admin")){
-        document.querySelector(`#Username_alert`).textContent = error + "  שם המשתמש כבר קיים.  ";
-        usernameTaken = true;
+    let usernameTaken = false;
+    if (users.some(user => user.username.toLowerCase() === inputUsername.toLowerCase() || inputUsername.toLowerCase() === "admin")){
+        if (loggedUser.length === 0){
+            document.querySelector(`#Username_alert`).textContent = error + "  שם המשתמש כבר קיים.  ";
+            usernameTaken = true;
+        }
+        else{
+            if (inputUsername.toLowerCase() !== loggedUser.username.toLowerCase()){
+                document.querySelector(`#Username_alert`).textContent = error + "  שם המשתמש כבר קיים.  ";
+                usernameTaken = true;
+            }
+
+        }
     }
 
     
@@ -79,10 +89,18 @@ export function VerifyForm(page){
     const emailValid = regEmail.test(inputEmail);
     document.querySelector(`#Email_alert`).textContent = (!emailValid) ? error + "  כתובת המייל לא תקינה אותיות לועזיות ותווים מיוחדים בלבד.  " : "";
     
-    const emailTaken = false;
-    if (page == "registration" && users.some(user => user.email.toLowerCase() === inputEmail.toLowerCase())){
-        document.querySelector(`#Email_alert`).textContent = error + "  כתובת המייל כבר קיימת.  ";
-        emailTaken = true;
+    let emailTaken = false;
+    if (users.some(user => user.email.toLowerCase() === inputEmail.toLowerCase())){
+        if (loggedUser.length === 0){
+            document.querySelector(`#Email_alert`).textContent = error + "  כתובת המייל כבר קיימת.  ";
+            emailTaken = true;
+        }
+        else{
+            if (inputEmail.toLowerCase() !== loggedUser.email.toLowerCase()){
+                document.querySelector(`#Email_alert`).textContent = error + "  כתובת המייל כבר קיימת.  ";
+                emailTaken = true;
+            }
+        }
     }
     
     const cityValid = cities.includes(inputCity.trim());
@@ -204,24 +222,27 @@ export function LoadDetailsToUpdate(user){
 }
 
 export function UpdateDetails(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
-    const existingUser = JSON.parse(sessionStorage.getItem(`loggedUser`)) || {};
+    const data = JSON.parse(sessionStorage.getItem(`loggedUser`)) || {};
     let usersList = JSON.parse(localStorage.getItem('users')) || [];
 
-    const index = usersList.findIndex(user => user.username === existingUser.username);
+    const index = usersList.findIndex(user => user.username === data.username);
 
-    const updatedUser = {
-        ...existingUser,
-        username: inputUsername,
-        password: inputPassword,
-        picture: (profilePicture !== "") ? profilePicture : existingUser.picture,
-        first: inputFirst,
-        last: inputLast,
-        email: inputEmail,
-        date: inputDate,
-        city: inputCity,
-        street: inputStreet,
-        housenum: inputHousenum
-    };
+    const existingUser = new User(
+        data.username,
+        data.password,
+        data.picture,
+        data.first,
+        data.last,
+        data.email,
+        data.date,
+        data.city,
+        data.street,
+        data.housenum
+    );
+
+    const updatedUser = existingUser.UpdateDetails(inputUsername, inputPassword, (profilePicture !== "") ? profilePicture : existingUser.picture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum);
+    console.log(updatedUser);
+
 
     usersList[index] = updatedUser;
 
@@ -270,21 +291,6 @@ export function DeleteUser(){
     window.location.href = "admin.html";
 }
 
-// export function CreateTable(){
-//     let usersList = JSON.parse(localStorage.getItem('users'))||[];
-//     let userTable = document.createElement("table");
-//     usersList.forEach((user) => {
-//         userTable.innerHTML += '<tr>'; 
-//         Object.values(user).forEach((variable) => {
-//             userTable.innerHTML += `<td>${variable}</td>`;
-
-//         } )          
-//         userTable.innerHTML += '</tr>'; 
-//     } );
-//     document.body.appendChild(userTable);
-// }
-
-
 
 
 export function CreateTable(){
@@ -304,6 +310,8 @@ export function CreateTable(){
     fullnameTitle.innerHTML = "שם מלא"; 
     let dateTitle = document.createElement("td");
     dateTitle.innerHTML = "תאריך לידה"; 
+    let addressTitle  = document.createElement("td");
+    addressTitle.innerHTML = "כתובת";
     let emailTitle = document.createElement("td");
     emailTitle.innerHTML = "אימייל"; 
     emailTitle.id = "email";
@@ -312,7 +320,7 @@ export function CreateTable(){
     let editTitle = document.createElement("td");
     editTitle.innerHTML = "עריכה"; 
 
-    titleRow.append(picTitle, usernameTitle, fullnameTitle, dateTitle, emailTitle, delTitle, editTitle);
+    titleRow.append(picTitle, usernameTitle, fullnameTitle, dateTitle, addressTitle, emailTitle, delTitle, editTitle);
     userTable.append(titleRow);
      
 
@@ -327,6 +335,7 @@ export function CreateTable(){
         let username = document.createElement("td");
         let fullname = document.createElement("td");
         let date = document.createElement("td");
+        let address = document.createElement("td");
         let email = document.createElement("td");
         email.id = "email";
         let deleteTd = document.createElement("td");
@@ -341,7 +350,9 @@ export function CreateTable(){
         username.innerHTML = user.username;
         fullname.innerHTML = User.GetFullName(user);
         date.innerHTML = User.GetBirthdate(user);
+        address.innerHTML = `${user.city}<br>${user.street}<br>${user.housenum}`;
         email.innerHTML = user.email;
+
         Object.assign(deleteButton.dataset, user);
         deleteButton.id = "delete";
         deleteButton.innerHTML = "מחק"
@@ -349,7 +360,7 @@ export function CreateTable(){
         editButton.id = "edit";
         editButton.innerHTML = "ערוך"
 
-        userRow.append(picTd, username, fullname, date, email, deleteTd, editTd);       
+        userRow.append(picTd, username, fullname, date, address, email, deleteTd, editTd);       
         userTable.append(userRow);
     } );
     let cont = document.createElement("div");

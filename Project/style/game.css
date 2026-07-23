@@ -61,6 +61,7 @@ input[type="radio"]{
 }
 
 #gameSettings {
+    width: 500px;
     background-color: rgba(245, 222, 179, 0.6);
     padding: 80px;
     border-radius: 120px;

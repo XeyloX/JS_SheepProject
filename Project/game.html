@@ -22,10 +22,10 @@
 
                 <label>בחרו את ספינות היריב עד 6</label><br>
                 <label class="shipsRemaining" id="0">ספינות שנשארו לבחירה: 6</label><br>
-                <label>ספינה גודל 2</label><input class="shipCount" id="ship2" type="number" value="0" max="6"><br>
-                <label>ספינה גודל 3</label><input class="shipCount" id="ship3" type="number" value="0" max="6"><br>
-                <label>ספינה גודל 4</label><input class="shipCount" id="ship4" type="number" value="0" max="6"><br>
-                <label>ספינה גודל 5</label><input class="shipCount" id="ship5" type="number" value="0" max="6" ><br>
+                <label>ספינה גודל 2</label><input class="shipCount" id="ship2" type="number" value="0" min="0" step="1" max="6"  onkeypress="return event.charCode !== 46 && event.charCode !== 45"><br>
+                <label>ספינה גודל 3</label><input class="shipCount" id="ship3" type="number" value="0" min="0" step="1" max="6"  onkeypress="return event.charCode !== 46 && event.charCode !== 45"><br>
+                <label>ספינה גודל 4</label><input class="shipCount" id="ship4" type="number" value="0" min="0" step="1" max="6"  onkeypress="return event.charCode !== 46 && event.charCode !== 45"><br>
+                <label>ספינה גודל 5</label><input class="shipCount" id="ship5" type="number" value="0" min="0" step="1" max="6"  onkeypress="return event.charCode !== 46 && event.charCode !== 45"><br>
                 <button type="submit">התחלת משחק</button>
             </form>
         </div>
