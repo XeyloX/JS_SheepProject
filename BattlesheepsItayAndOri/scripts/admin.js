@@ -109,7 +109,9 @@ function DeleteUser(){
     usersList.splice(index, 1);
     localStorage.setItem('users', JSON.stringify(usersList));
     window.location.href = "admin.html";
+    sessionStorage.removeItem('userToDelete');
 }
+
 let exit = document.querySelector('#exit');
 exit.addEventListener('click',() => {
     sessionStorage.removeItem('loggedAdmin');

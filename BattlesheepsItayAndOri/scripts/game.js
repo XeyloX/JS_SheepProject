@@ -234,22 +234,33 @@ function UpdateRemainingShips(){
     let remaining = document.querySelector(".shipsRemaining");
     let shipInput = document.querySelectorAll(".shipCount");
     shipInput.forEach(input => {
-        input.addEventListener("blur", () => {
+        input.addEventListener("input", () => {
             let shipCount = 0;
             shipInput.forEach(values => {
-                shipCount += parseInt(values.value);
+                shipCount += Number(values.value);
             });
-            if (shipCount === 0){
-                alert("צריך לבחור לפחות ספינה אחת")
-            }
-            else if (6-shipCount >= 0){
-                remaining.innerHTML = `ספינות שנשארו לבחירה: ${6-shipCount}`;
+            if (shipCount <= 6){
+                remaining.innerHTML = `ספינות שנשארו לבחירה: ${6 - shipCount}`;
             }
             else{
-                input.value = 0;
-                alert("אי אפשר לבחור יותר מ 6 ספינות בסך הכל");
+                remaining.innerHTML = `נבחרו ${shipCount - 6} ספינות יותר מדי`;
             }
         })
+        input.addEventListener("blur", () => {
+            if (input.value == ""){
+                input.value = 0;
+                let shipCount = 0;
+                shipInput.forEach(values => {
+                    shipCount += Number(values.value);
+                });
+                if (shipCount <= 6){
+                    remaining.innerHTML = `ספינות שנשארו לבחירה: ${6 - shipCount}`;
+                }
+                else{
+                    remaining.innerHTML = `נבחרו ${shipCount - 6} ספינות יותר מדי`;
+                }
+            }
+        });
     });
 }
 
@@ -267,30 +278,34 @@ function StartGame(){
        
 
 
-        if (totalShips > 0 && totalShips <= 6){
-            document.querySelector("#gameSettings").style.display = "none";
-            document.querySelector("#board").style.visibility = "visible";
-            document.dir = "ltr";
-            let ships = []
-            let id = 0;
-            
-
-            document.querySelector("#remainingTwo").innerHTML = `${shipTwo}`;
-            document.querySelector("#remainingThree").innerHTML = `${shipThree}`;
-            document.querySelector("#remainingFour").innerHTML = `${shipFour}`;
-            document.querySelector("#remainingFive").innerHTML = `${shipFive}`;
-
-            for (let i = 0; i < shipTwo; i++){ id++; ships.push(new Ship(id, 2))}
-            for (let i = 0; i < shipThree; i++){ id++; ships.push(new Ship(id, 3))}
-            for (let i = 0; i < shipFour; i++){ id++; ships.push(new Ship(id, 4))}
-            for (let i = 0; i < shipFive; i++){ id++; ships.push(new Ship(id, 5))}
-            let boardSize = document.querySelector('input[name="boardSize"]:checked').value;
-
-            CreateBoard(boardSize, ships);
+        if (totalShips === 0){
+            alert("צריך לבחור לפחות ספינה אחת");
+            return;
         }
-        else if (totalShips === 0){
-            alert("צריך לבחור לפחות ספינה אחת")
+
+        if (totalShips > 6){
+            alert("אי אפשר לבחור יותר מ־6 ספינות בסך הכל");
+            return;
         }
+        document.querySelector("#gameSettings").style.display = "none";
+        document.querySelector("#board").style.visibility = "visible";
+        document.dir = "ltr";
+        let ships = []
+        let id = 0;
+        
+
+        document.querySelector("#remainingTwo").innerHTML = `${shipTwo}`;
+        document.querySelector("#remainingThree").innerHTML = `${shipThree}`;
+        document.querySelector("#remainingFour").innerHTML = `${shipFour}`;
+        document.querySelector("#remainingFive").innerHTML = `${shipFive}`;
+
+        for (let i = 0; i < shipTwo; i++){ id++; ships.push(new Ship(id, 2))}
+        for (let i = 0; i < shipThree; i++){ id++; ships.push(new Ship(id, 3))}
+        for (let i = 0; i < shipFour; i++){ id++; ships.push(new Ship(id, 4))}
+        for (let i = 0; i < shipFive; i++){ id++; ships.push(new Ship(id, 5))}
+        let boardSize = document.querySelector('input[name="boardSize"]:checked').value;
+
+        CreateBoard(boardSize, ships);
     })
 }
 
