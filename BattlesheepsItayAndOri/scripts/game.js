@@ -156,7 +156,7 @@ function BlowUp(arr, ships, xy){
                 let image = cell.querySelector('img');
                 if (foundShip.health <= 0){
                     DisplayShip(arr, foundShip);
-                    const explode = new Audio('/Project/audio/explosion.mp3');
+                    const explode = new Audio('./audio/explosion.mp3');
                     explode.play();
 
                     let shipToCut = (foundShip.size === 2) ? "remainingTwo" : (foundShip.size === 3) ? "remainingThree" : (foundShip.size === 4) ? "remainingFour" : "remainingFive";
@@ -168,9 +168,9 @@ function BlowUp(arr, ships, xy){
                     }
                 }
                 else{
-                    image.src = "/Project/images/explosion.png";
+                    image.src = "./images/explosion.png";
                     image.className = "explosion";
-                    const hit = new Audio('/Project/audio/hit.mp3');
+                    const hit = new Audio('./audio/hit.mp3');
                     hit.volume = 0.3;
                     hit.play();
                 }
@@ -187,12 +187,12 @@ function BlowUp(arr, ships, xy){
 function DisplayShip(arr, foundShip){
     let startCell = document.getElementById(foundShip.startXY);
     let image = startCell.querySelector('img');
-    image.src = "/Project/images/ship3.png";
+    image.src = "./images/ship3.png";
     image.className = "ship";
     image.style.height = `${foundShip.size*50}px`;
 
     let explosionAnimated = document.createElement("img");
-    explosionAnimated.src = "/Project/images/explosion.png";
+    explosionAnimated.src = "./images/explosion.png";
     explosionAnimated.className = "explosionAnimated";
     
     let startId = foundShip.startXY;

@@ -3,7 +3,7 @@
     box-sizing: border-box;
 }
 body{
-    background-image: url(/Project/images/BG1.jpg);
+    background-image: url(../images/BG1.jpg);
     background-size: cover;
     margin: 0;
     padding: 0;

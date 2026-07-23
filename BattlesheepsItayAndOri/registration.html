@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./scripts/update_details.js"></script>
+    <script type="module" src="./scripts/registration.js"></script>
     <link rel="stylesheet" href="./style/registration.css">
-    <title>Document</title>
+    <title>Registration</title>
 </head>
 <body>
-    
     <div class="container">
-        <h1>עדכון פרטים</h1>
-        
+        <h1>הרשמה</h1> 
         <form id="Register_form">
             <div class="box">
                 <label>שם משתמש: </label>
@@ -72,12 +70,12 @@
                 <input hidden id="Profile_pic" type="file" accept=".jpg,.jpeg,image/jpeg">
                 <div class="boximg">
                     <button type="button" id="Choose_picture">הוסף תמונה +</button>
-                    <img style="visibility: visible;" id="pic_preview" src="" alt="">
+                    <img id="pic_preview" src="" alt="">
                 </div>
                 <label class="alert" id="Picture_alert"></label>
             </div>
-            <button id="button_submit" type="submit">עדכן פרטים</button>
-            <button id="button_cancel" onclick="event.preventDefault(); history.back()">בטל</button>
+            <button id="button_submit" type="submit">הרשם</button>
+            <a href="index.html" class="gologin">יש לכם כבר חשבון? לחצו כאן</a>
         </form>
     </div>
     <a id="return_page" href="admin.html" style="visibility: hidden">חזרה לעמוד ניהול</a>

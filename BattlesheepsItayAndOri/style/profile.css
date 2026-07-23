@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body{
-    background-image: url(/Project/images/BG1.jpg);
+    background-image: url(../images/BG1.jpg);
     background-size: cover;
     display: flex;
     margin: 0;
@@ -10,10 +10,9 @@ body{
     font-family: arial;
     font-size:1.5em;
 }
-
 .container{
     display: flex;
-    max-width: 1000px;
+    max-width: 750px;
     margin: 0 auto;
     min-height: 1000px;
     align-items: center;
@@ -32,7 +31,7 @@ h1{
     color:lightgray;
 }
 
-#Login_form{
+.profile{
     border: 2px solid black;
     border-radius: 120px;
     background: rgba(245, 222, 179, 0.6);
@@ -50,30 +49,27 @@ h1{
     width: 100%;
     justify-content: space-between;
     position:relative;
+    align-items: center;
+}
+#profile_pic{
+    width: 30%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-label{
-    width: 50%;
+
+h2, h4{
     font-weight: bold;
     color:#222;
 }
 
-input{
-    border: none;
-    border-radius: 12px;
-    width:50%;
-    background: rgb(245, 222, 179);
+.buttons {
+    height: 50px;
 }
 
-input, button{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-input, button, textarea, select {
+button{
     font: inherit;
-}
-
-#button_submit{
     border: none;
     border-radius: 12px;
     color: #222;
@@ -81,46 +77,11 @@ input, button, textarea, select {
     transition: 800ms;
     background: rgb(245, 222, 179);
     padding: 8px;
-
+    button{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-#button_submit:hover{
+}
+button:hover{
    transition: 800ms;
     background: rgba(0, 0, 0, 0.323); 
-}
-
-.goregister{
-    width:100%;
-    margin-top:20px;
-    color:black;
-    text-decoration:none;
-    font-weight: bold;
-}
-
-.alert{
-    position: absolute;
-    transition: 1000ms;
-    top:8px;
-    right:105%;
-    z-index: 1000;
-    background-color: rgba(245, 245, 245, 0.701);
-    border-radius: 12px;
-    width: max-content;
-    box-sizing: content-box;
-    max-width: 400px;
-    font-weight: bold;
-    padding: 0;
-    white-space: pre-wrap;
-    font-size: 15px;
-}
-#return_page {
-    text-decoration: none;
-    color: rgba(245, 222, 179);
-    position: fixed;
-    top: 40px;
-    right: 60px;
-    transition: 600ms;
-}
-
-#return_page:hover {
-    transform: scale(1.3, 1.3);
 }
