@@ -1,4 +1,4 @@
-import { VerifyForm, CheckImage, retunrToAdmin } from "./functions.js";
+import { VerifyForm, CheckImage, returnToAdmin } from "./functions.js";
 import { GetCities } from "./cities.js";
 
 const user = JSON.parse(sessionStorage.getItem(`loggedUser`));
@@ -33,5 +33,5 @@ function LoadPage() {
 
 
 
-retunrToAdmin();
+returnToAdmin();
 LoadPage();

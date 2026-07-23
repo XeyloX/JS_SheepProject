@@ -161,7 +161,7 @@ td {
     color: rgba(245, 222, 179);
     position: fixed;
     top: 40px;
-    left: 60px;
+    right: 60px;
     transition: 600ms;
 }
 

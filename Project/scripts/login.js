@@ -1,4 +1,4 @@
-import { retunrToAdmin } from "./functions.js";
+import { returnToAdmin } from "./functions.js";
 const user = JSON.parse(sessionStorage.getItem(`loggedUser`));
 
 function VerifyLogin(){
@@ -57,4 +57,4 @@ document.querySelector("#Login_form").addEventListener('submit', function(event)
 });
 
 
-retunrToAdmin();
+returnToAdmin();

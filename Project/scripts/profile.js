@@ -2,12 +2,13 @@ import User from "./models/user.js"
 
 const user = JSON.parse(sessionStorage.getItem(`loggedUser`));
 
+
+
 function LoadProfile(){
     if (!user) {
         window.location.href = "index.html";
     }
     else{
-
         document.querySelector(`#fullname`).innerHTML = User.GetFullName(user);
         document.querySelector(`#email`).innerHTML = user.email;
         document.querySelector(`#address`).innerHTML = `${user.street} ${user.housenum}, ${user.city}`;

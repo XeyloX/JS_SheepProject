@@ -13,13 +13,13 @@
         <form id="Login_form">
             <div class="box">
                 <label>שם משתמש: </label>
-                <input id="Username_login" type="text">
+                <input id="Username_login" type="text" required maxlength="60">
                 <label class="alert" id="Username_alert"></label>
             </div>
             <div class="box">
                 <label>סיסמה: </label>
                 <input id="Password_login" type="password">
-                <label class="alert" id="Password_alert"></label>
+                <label class="alert" id="Password_alert" required minlength="7" maxlength="12"></label>
             </div>
             <button id="button_submit" type="submit">התחבר</button>
             <a href="registration.html" class="goregister">אין לכם עדיין חשבון? לחצו כאן</a>

@@ -18,7 +18,7 @@ export function CheckImage(){
         profilePicture = "";
 
         if (inputPicture.files.length === 0){
-            pictureAlert.textContent = error;
+            pictureAlert.textContent = "❌";
             return;
         }
         const file = inputPicture.files[0];
@@ -138,29 +138,31 @@ export function VerifyForm(page){
 }
 
 export function LoadDetailsToUpdate(user){
-    if (!user && !userToEdit) {
+    if (!user) {
         window.location.href = "index.html";
     }
-    document.querySelector(`#Username_in`).value = user.username;
-    document.querySelector(`#Password_in`).value = user.password;
-    document.querySelector(`#Confirm_in`).value = user.password;
-    document.querySelector(`#pic_preview`).src = user.picture;
-    document.querySelector(`#First_in`).value = user.first;
-    document.querySelector(`#Last_in`).value = user.last;
-    document.querySelector(`#Email_in`).value = user.email;
-    document.querySelector(`#Date`).value = user.date;
-    document.querySelector(`#cityList`).value = user.city;
-    document.querySelector(`#Street_in`).value = user.street;
-    document.querySelector(`#Housenum_in`).value = user.housenum;
-
-    document.querySelector("#Register_form").addEventListener('submit', function(event) {
-            event.preventDefault();
-            VerifyForm("update");             
-    });
-
-    document.querySelector("#Choose_picture").addEventListener("click", function () {
-            document.querySelector("#Profile_pic").click();
-    });
+    else{
+        document.querySelector(`#Username_in`).value = user.username;
+        document.querySelector(`#Password_in`).value = user.password;
+        document.querySelector(`#Confirm_in`).value = user.password;
+        document.querySelector(`#pic_preview`).src = user.picture;
+        document.querySelector(`#First_in`).value = user.first;
+        document.querySelector(`#Last_in`).value = user.last;
+        document.querySelector(`#Email_in`).value = user.email;
+        document.querySelector(`#Date`).value = user.date;
+        document.querySelector(`#cityList`).value = user.city;
+        document.querySelector(`#Street_in`).value = user.street;
+        document.querySelector(`#Housenum_in`).value = user.housenum;
+    
+        document.querySelector("#Register_form").addEventListener('submit', function(event) {
+                event.preventDefault();
+                VerifyForm("update");             
+        });
+    
+        document.querySelector("#Choose_picture").addEventListener("click", function () {
+                document.querySelector("#Profile_pic").click();
+        });
+    }
 
 }
 
@@ -233,7 +235,7 @@ function UpdateDetails(inputUsername, inputPassword, profilePicture, inputFirst,
     window.location.href = "profile.html";
 }
 
-export function retunrToAdmin(){
+export function returnToAdmin(){
 
     let link = document.getElementById('return_page');
     const admin = JSON.parse(sessionStorage.getItem('loggedAdmin'));

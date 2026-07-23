@@ -239,7 +239,10 @@ function UpdateRemainingShips(){
             shipInput.forEach(values => {
                 shipCount += parseInt(values.value);
             });
-            if (6-shipCount >= 0){
+            if (shipCount === 0){
+                alert("צריך לבחור לפחות ספינה אחת")
+            }
+            else if (6-shipCount >= 0){
                 remaining.innerHTML = `ספינות שנשארו לבחירה: ${6-shipCount}`;
             }
             else{
@@ -285,7 +288,7 @@ function StartGame(){
 
             CreateBoard(boardSize, ships);
         }
-        else{
+        else if (totalShips === 0){
             alert("צריך לבחור לפחות ספינה אחת")
         }
     })
