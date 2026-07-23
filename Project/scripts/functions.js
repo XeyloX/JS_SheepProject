@@ -26,7 +26,9 @@ export function CheckImage(){
 
         reader.onload = function () {
             profilePicture = reader.result;
-            document.querySelector(`#pic_preview`).src = profilePicture;
+            let img = document.querySelector(`#pic_preview`);
+            img.src = profilePicture;
+            img.style.visibility = "visible";
         };
         reader.onerror = function () {
             pictureAlert.textContent = "שגיאה בקריאת התמונה";
@@ -135,79 +137,10 @@ export function VerifyForm(page){
 
 }
 
-function CreateUser(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
-    const users = JSON.parse(localStorage.getItem(`users`)) || [];
-    const user = new User(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum);
-
-    users.push(user);
-    localStorage.setItem("users", JSON.stringify(users));
-    window.location.href = "index.html";
-}
-
-export function VerifyLogin(){
-    const users = JSON.parse(localStorage.getItem(`users`)) || [];
-
-    let loginUsername = document.querySelector(`#Username_login`).value;
-    let loginPassword = document.querySelector(`#Password_login`).value;
-
-
-
-    if (loginUsername == "admin" && loginPassword == "admin1234admin"){
-        sessionStorage.setItem("loggedAdmin", JSON.stringify({"username": "admin"}));
-        window.location.href = "admin.html";
-    }
-
-    else{
-        
-        const foundUser = users.find(user => 
-            user.username.toLowerCase() === loginUsername.toLowerCase());
-
-        const passwordCorrect = users.find(user => 
-            user.username.toLowerCase() === loginUsername.toLowerCase() &&
-            user.password === loginPassword);
-        if (passwordCorrect){
-            sessionStorage.setItem("loggedUser", JSON.stringify(foundUser));
-            window.location.href = "profile.html"
-        }
-    
-        if (!foundUser){
-            document.querySelector(`#Username_alert`).innerHTML = "  משתמש לא נמצא  ";
-        }
-        else if (foundUser){
-            document.querySelector(`#Username_alert`).innerHTML = "";
-        }
-
-        if (!passwordCorrect){
-            document.querySelector(`#Password_alert`).innerHTML = "  סיסמה לא נכונה  ";
-        }
-    }
-}
-
-export function LoadProfile(){
-    const user = JSON.parse(sessionStorage.getItem(`loggedUser`));
-
-    document.querySelector(`#fullname`).innerHTML = User.GetFullName(user);
-    document.querySelector(`#email`).innerHTML = user.email;
-    document.querySelector(`#address`).innerHTML = `${user.street} ${user.housenum}, ${user.city}`;
-    document.querySelector(`#birthday`).innerHTML = User.GetBirthdate(user);
-    document.querySelector(`#profile_pic`).src = user.picture;
-}
-
-export function ProfileButtons(id){
-    console.log(id);
-    if (id == "Logout"){
-        sessionStorage.removeItem('loggedUser');
+export function LoadDetailsToUpdate(user){
+    if (!user && !userToEdit) {
         window.location.href = "index.html";
     }
-    else if (id == "Game"){
-        window.location.href = "game.html";
-    }
-    else if (id == "Update_details"){
-        window.location.href = "update_details.html"
-    }
-}
-
-export function LoadDetailsToUpdate(user){
     document.querySelector(`#Username_in`).value = user.username;
     document.querySelector(`#Password_in`).value = user.password;
     document.querySelector(`#Confirm_in`).value = user.password;
@@ -219,9 +152,56 @@ export function LoadDetailsToUpdate(user){
     document.querySelector(`#cityList`).value = user.city;
     document.querySelector(`#Street_in`).value = user.street;
     document.querySelector(`#Housenum_in`).value = user.housenum;
+
+    document.querySelector("#Register_form").addEventListener('submit', function(event) {
+            event.preventDefault();
+            VerifyForm("update");             
+    });
+
+    document.querySelector("#Choose_picture").addEventListener("click", function () {
+            document.querySelector("#Profile_pic").click();
+    });
+
 }
 
-export function UpdateDetails(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
+function CreateUser(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
+    const users = JSON.parse(localStorage.getItem(`users`)) || [];
+    const user = new User(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum);
+
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    window.location.href = "index.html";
+}
+
+function AdminUpdateDetails(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
+    let usersList = JSON.parse(localStorage.getItem('users')) || [];
+    const userToEdit = JSON.parse(sessionStorage.getItem('userToEdit')); 
+    const index = usersList.findIndex(user => user.username === userToEdit.username);
+
+    const updatedUser = {
+        ...userToEdit,
+        username: inputUsername,
+        password: inputPassword,
+        picture: (profilePicture !== "") ? profilePicture : userToEdit.picture,
+        first: inputFirst,
+        last: inputLast,
+        email: inputEmail,
+        date: inputDate,
+        city: inputCity,
+        street: inputStreet,
+        housenum: inputHousenum
+    };
+
+    usersList[index] = updatedUser;
+
+    const userString = JSON.stringify(updatedUser);
+    localStorage.setItem('users', JSON.stringify(usersList));
+    sessionStorage.removeItem('userToEdit');
+
+    window.location.href = "admin.html";
+}
+
+function UpdateDetails(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
     const data = JSON.parse(sessionStorage.getItem(`loggedUser`)) || {};
     let usersList = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -253,119 +233,12 @@ export function UpdateDetails(inputUsername, inputPassword, profilePicture, inpu
     window.location.href = "profile.html";
 }
 
+export function retunrToAdmin(){
 
-export function AdminUpdateDetails(inputUsername, inputPassword, profilePicture, inputFirst, inputLast, inputEmail, inputDate, inputCity, inputStreet, inputHousenum){
-    let usersList = JSON.parse(localStorage.getItem('users')) || [];
-    const userToEdit = JSON.parse(sessionStorage.getItem('userToEdit')); 
-    const index = usersList.findIndex(user => user.username === userToEdit.username);
-
-    const updatedUser = {
-        ...userToEdit,
-        username: inputUsername,
-        password: inputPassword,
-        picture: (profilePicture !== "") ? profilePicture : userToEdit.picture,
-        first: inputFirst,
-        last: inputLast,
-        email: inputEmail,
-        date: inputDate,
-        city: inputCity,
-        street: inputStreet,
-        housenum: inputHousenum
-    };
-
-    usersList[index] = updatedUser;
-
-    const userString = JSON.stringify(updatedUser);
-    localStorage.setItem('users', JSON.stringify(usersList));
-    sessionStorage.removeItem('userToEdit');
-
-    window.location.href = "admin.html";
-}
-
-export function DeleteUser(){
-    let usersList = JSON.parse(localStorage.getItem('users')) || [];
-    const userToDelete = JSON.parse(sessionStorage.getItem('userToDelete')); 
-    const index = usersList.findIndex(user => user.username === userToDelete.username);
-    usersList.splice(index, 1);
-    localStorage.setItem('users', JSON.stringify(usersList));
-    window.location.href = "admin.html";
-}
-
-
-
-export function CreateTable(){
-    let usersList = JSON.parse(localStorage.getItem('users'))||[];
-    let userTable = document.createElement("table");
-    
-    
-    let titleRow = document.createElement("tr");
-    titleRow.className = "box";
-
-    let picTitle = document.createElement("td");
-    picTitle.innerHTML = "תמונה"; 
-    picTitle.id = "picture";
-    let usernameTitle = document.createElement("td");
-    usernameTitle.innerHTML = "שם משתמש"; 
-    let fullnameTitle = document.createElement("td");
-    fullnameTitle.innerHTML = "שם מלא"; 
-    let dateTitle = document.createElement("td");
-    dateTitle.innerHTML = "תאריך לידה"; 
-    let addressTitle  = document.createElement("td");
-    addressTitle.innerHTML = "כתובת";
-    let emailTitle = document.createElement("td");
-    emailTitle.innerHTML = "אימייל"; 
-    emailTitle.id = "email";
-    let delTitle = document.createElement("td");
-    delTitle.innerHTML = "מחיקה"; 
-    let editTitle = document.createElement("td");
-    editTitle.innerHTML = "עריכה"; 
-
-    titleRow.append(picTitle, usernameTitle, fullnameTitle, dateTitle, addressTitle, emailTitle, delTitle, editTitle);
-    userTable.append(titleRow);
-     
-
-
-    usersList.forEach((user) => {
-        let userRow = document.createElement("tr");
-        userRow.className = "box";
-        let picTd = document.createElement("td");
-        let picture = document.createElement("img");
-        picTd.append(picture);
-        picTd.id = "picture";
-        let username = document.createElement("td");
-        let fullname = document.createElement("td");
-        let date = document.createElement("td");
-        let address = document.createElement("td");
-        let email = document.createElement("td");
-        email.id = "email";
-        let deleteTd = document.createElement("td");
-        let deleteButton = document.createElement("button");
-        deleteTd.append(deleteButton);
-        let editTd = document.createElement("td");
-        let editButton = document.createElement("button");
-        editTd.append(editButton);
-
-
-        picture.src = user.picture;
-        username.innerHTML = user.username;
-        fullname.innerHTML = User.GetFullName(user);
-        date.innerHTML = User.GetBirthdate(user);
-        address.innerHTML = `${user.city}<br>${user.street}<br>${user.housenum}`;
-        email.innerHTML = user.email;
-
-        Object.assign(deleteButton.dataset, user);
-        deleteButton.id = "delete";
-        deleteButton.innerHTML = "מחק"
-        Object.assign(editButton.dataset, user);
-        editButton.id = "edit";
-        editButton.innerHTML = "ערוך"
-
-        userRow.append(picTd, username, fullname, date, address, email, deleteTd, editTd);       
-        userTable.append(userRow);
-    } );
-    let cont = document.createElement("div");
-    cont.className = "container";
-    cont.append(userTable);
-    document.body.append(cont);
+    let link = document.getElementById('return_page');
+    const admin = JSON.parse(sessionStorage.getItem('loggedAdmin'));
+    if(admin){
+        link.style.visibility = "visible";
+    }
 }
 

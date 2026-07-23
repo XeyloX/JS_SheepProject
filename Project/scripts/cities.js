@@ -15,7 +15,6 @@ function CreateCitiesArray(array){
     });
     RenderAutocompleteList(cities);
 }
-
 function RenderAutocompleteList(cities){
     let list = document.querySelector(`#cities`);
 

@@ -60,6 +60,11 @@ label{
 input{
     border: none;
     border-radius: 12px;
+    background: rgb(245, 222, 179);
+}
+
+input, button{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .boxdate{
@@ -98,7 +103,7 @@ input, .boximg{
     transition: 800ms;
     background: rgba(0, 0, 0, 0.323);
 }
-#button_submit{
+#button_submit, #button_cancel{
     border: none;
     border-radius: 12px;
     color: #222;
@@ -106,9 +111,10 @@ input, .boximg{
     transition: 800ms;
     background: rgb(245, 222, 179);
     padding: 8px;
+    margin:4px;
 
 }
-#button_submit:hover{
+#button_submit:hover, #button_cancel:hover{
     transition: 800ms;
     background: rgba(0, 0, 0, 0.323); 
 }
@@ -117,6 +123,7 @@ input, .boximg{
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     object-fit: cover;
+    visibility: hidden;
 }
 
 .gologin{
@@ -142,4 +149,16 @@ input, .boximg{
     padding: 0;
     white-space: pre-wrap;
     font-size: 15px;
+}
+#return_page {
+    text-decoration: none;
+    color: rgba(245, 222, 179);
+    position: fixed;
+    top: 40px;
+    left: 60px;
+    transition: 600ms;
+}
+
+#return_page:hover {
+    transform: scale(1.3, 1.3);
 }

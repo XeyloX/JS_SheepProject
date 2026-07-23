@@ -1,6 +1,6 @@
 import Ship from "./models/ship.js"
 
-export function CreateBoard(boardSize, ships){
+function CreateBoard(boardSize, ships){
     document.querySelector("#remainingShips").style.visibility = "visible";
     const board = document.getElementById("board");
     let size = boardSize;
@@ -144,9 +144,7 @@ function CheckAround(size, x, y) {
 }
 
 function BlowUp(arr, ships, xy){
-    let mid = xy.indexOf(",");
-    let x = parseInt(xy.substring(0,mid));
-    let y = parseInt(xy.substring(mid+1));
+    let [x, y] = xy.split(",").map(Number);
     if (arr[x][y] > 0){
         let shipId = arr[x][y];
         const foundShip = ships.find(ship => ship.id === shipId);
@@ -198,9 +196,7 @@ function DisplayShip(arr, foundShip){
     explosionAnimated.className = "explosionAnimated";
     
     let startId = foundShip.startXY;
-    let mid = startId.indexOf(",");
-    let startX = parseInt(startId.substring(0,mid));
-    let startY = parseInt(startId.substring(mid+1));
+    let [startX, startY] = startId.split(",").map(Number);
     
     if (arr[startX][startY+1] === foundShip.id){
         image.id = "rotated";
@@ -226,9 +222,7 @@ function DisplayShip(arr, foundShip){
 
     document.querySelectorAll(".explosion").forEach(explosion => {
         let expId = explosion.parentElement.id;
-        let mid = expId.indexOf(",");
-        let expX = parseInt(expId.substring(0,mid));
-        let expY = parseInt(expId.substring(mid+1));
+        let [expX, expY] = expId.split(",").map(Number);
         if (arr[expX][expY] === foundShip.id){
             explosion.style.display = "none";
         }
@@ -236,14 +230,13 @@ function DisplayShip(arr, foundShip){
 
 }
 
-export function UpdateRemainingShips(){
+function UpdateRemainingShips(){
     let remaining = document.querySelector(".shipsRemaining");
     let shipInput = document.querySelectorAll(".shipCount");
     shipInput.forEach(input => {
         input.addEventListener("blur", () => {
             let shipCount = 0;
             shipInput.forEach(values => {
-                console.log(parseInt(values.value));
                 shipCount += parseInt(values.value);
             });
             if (6-shipCount >= 0){
@@ -257,7 +250,7 @@ export function UpdateRemainingShips(){
     });
 }
 
-export function StartGame(){
+function StartGame(){
     let remaining = document.querySelector(".shipsRemaining");
     let btn = document.querySelector("button");
     btn.addEventListener("click", function(event){
@@ -296,6 +289,13 @@ export function StartGame(){
             alert("צריך לבחור לפחות ספינה אחת")
         }
     })
+}
+
+let link = document.getElementById('return_page');
+const admin = JSON.parse(sessionStorage.getItem('loggedAdmin'));
+if(admin){
+    link.innerHTML = "חזרה לעמוד ניהול";
+    link.href = "admin.html";
 }
 
 UpdateRemainingShips();

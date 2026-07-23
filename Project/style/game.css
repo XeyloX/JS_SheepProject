@@ -23,11 +23,12 @@ body {
     min-height: 700px;
     position: relative;
 }
-h1{
+
+h1 {
     color: lightgrey;
     width: 60%;
     text-align: center;
-    margin:20px auto;
+    margin: 20px auto;
 }
 
 label,
@@ -39,25 +40,28 @@ button {
     color: #222;
 }
 
-input, button{
+input,
+button {
     border-radius: 12px;
     background: rgb(245, 222, 179);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .size {
-  display: inline-flex;
-  align-items: center;
+    display: inline-flex;
+    align-items: center;
 }
 
 .size label {
-  display: inline-block;
-  width: 60px;
+    display: inline-block;
+    width: 60px;
 }
 
-input[type="radio"]{
+input[type="radio"] {
     width: 30px;
     height: 30px;
-    accent-color: rgb(245, 222, 179);;
+    accent-color: rgb(245, 222, 179);
+    ;
 }
 
 #gameSettings {
@@ -80,13 +84,13 @@ input[type="radio"]{
     min-height: 400px;
     padding: 4%;
     margin: 0 auto;
-    
+
 }
 
-#remainingShips{
+#remainingShips {
     background-color: rgba(245, 222, 179, 0.6);
     position: absolute;
-    left:85%;
+    left: 85%;
     width: 35%;
     padding: 4%;
     border-radius: 60px;
@@ -150,4 +154,17 @@ td {
     margin: 0;
     border-collapse: collapse;
     text-align: center;
+}
+
+#return_page {
+    text-decoration: none;
+    color: rgba(245, 222, 179);
+    position: fixed;
+    top: 40px;
+    left: 60px;
+    transition: 600ms;
+}
+
+#return_page:hover {
+    transform: scale(1.3, 1.3);
 }
