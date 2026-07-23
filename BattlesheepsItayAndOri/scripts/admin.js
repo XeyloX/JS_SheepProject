@@ -8,6 +8,7 @@ function CreateTable(){
     if (!admin) {
         window.location.href = "index.html";
     }
+    
     let usersList = JSON.parse(localStorage.getItem('users'))||[];
     let userTable = document.createElement("table");
     
